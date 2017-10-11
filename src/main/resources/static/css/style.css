@@ -1,0 +1,61 @@
+ul.tabs
+{
+display: table;
+margin: 0;
+padding: 0;
+list-style: none;
+position: relative;
+}
+
+ul.tabs li
+{
+margin: 0;
+padding: 0;
+list-style: none;
+display: table-cell;
+float: left;
+position: relative;
+}
+
+ul.tabs a
+{
+position: relative;
+display: block;
+}
+
+/* dropdowns
+*************************/
+
+ul.dropdown
+{
+margin: 0;
+padding: 0;
+display: block;
+position: absolute;
+z-index: 999;
+top: 100%;
+width: 250px;
+display: none;
+left: 0;
+}
+
+ul.dropdown ul.dropdown
+{
+top: 0;
+left: 95%;
+}
+
+ul.dropdown li
+{
+margin: 0;
+padding: 0;
+float: none;
+position: relative;
+list-style: none;
+display: block;
+}
+
+ul.dropdown li a
+{
+display: block;
+}
