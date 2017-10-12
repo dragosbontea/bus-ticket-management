@@ -23,7 +23,6 @@ public class CitiesController {
     @ResponseBody
     @RequestMapping(value = "/getCities", method = RequestMethod.GET)
     public List<String> getCities() {
-        log.info("Ajunge in restcall");
         List<String> cities = new ArrayList<>();
         jdbcTemplate.query("SELECT departure_city from buses", rs -> {
             cities.add(rs.getString("departure_city"));

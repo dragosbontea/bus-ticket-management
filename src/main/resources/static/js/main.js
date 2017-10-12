@@ -9,9 +9,7 @@ jQuery.ajax({
 });
 
 var select = document.getElementById("selectCity");
-// Optional: Clear all existing options first:
 
-//select.innerHTML = "<option class="disabledOpt" disabled selected value>-- please choose --</option>";
 select.innerHTML = "<option disabled selected value> --please choose -- </option>";
 for(var i = 0; i < listOfCities.length; i++) {
     var opt = listOfCities[i];
@@ -45,7 +43,6 @@ function toggle(el){
     table.appendChild(new_tbody);
     table.style.opacity = "1";
     document.getElementsByClassName("trainTableDiv")[0].style.opacity = "1";
-//    table.style.visibility = "visible";
 }
 
 function createRowForTrain(train, row) {

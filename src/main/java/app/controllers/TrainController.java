@@ -21,7 +21,7 @@ public class TrainController {
     @RequestMapping(value = "/getTrainsPerCity", method = RequestMethod.GET)
     public List<TrainBean> getCities(@RequestParam(value="city") String city) {
         List<TrainBean> trainsFromCertainCity = new ArrayList<>();
-        //public TrainBean(String name, String departureCity, String arrivalCity, LocalDate date, LocalTime departureTime, float price ) {
+
         jdbcTemplate.query("SELECT * from buses WHERE departure_city = '" + city +"';", rs -> {
             TrainBean train = new TrainBean(
                     rs.getString("name"),

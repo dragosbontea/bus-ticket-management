@@ -26,23 +26,38 @@ public class Application implements CommandLineRunner{
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     private static final String BUS_TABLE = "buses";
-    private static List<TrainBean> busses = new ArrayList<>();
-    AtomicInteger id = new AtomicInteger(0);
+
+    private List<TrainBean> busses = new ArrayList<>();
+    private AtomicInteger id = new AtomicInteger(0);
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     public static void main(String args[]) {
         SpringApplication.run(Application.class, args);
     }
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
-
     @Override
     public void run(String... strings) throws Exception {
+        initDB();
+    }
 
+    private static List<Object[]> busListAsObjects(Collection<TrainBean> busses) {
+        return busses.stream().map(
+                bus -> new Object[]{bus.getId(), bus.getName(), bus.getDepartureCity(), bus.getArrivalCity(), Date.valueOf(bus.getDate()),
+                        Time.valueOf(bus.getDepartureTime()), bus.getNrSeats(), bus.getNrSeatsAvailable(), bus.getPrice()})
+                .collect(Collectors.toList());
+    }
+
+    private void initDB() {
         TrainBean busBucurestiToBacau = new TrainBean(id.getAndIncrement(), "InterCity", "Bucuresti", "Bacau", LocalDate.of(2017, 9, 8), LocalTime.of(18, 25), 100, 100, 78);
         TrainBean busBacauToBucuresti = new TrainBean(id.getAndIncrement(), "InterCity", "Bacau", "Bucuresti", LocalDate.of(2017, 9, 10), LocalTime.of(18, 0), 100, 100, 78);
+        TrainBean busBucurestiToConstanta = new TrainBean(id.getAndIncrement(), "InterCity", "Bucuresti", "Constanta", LocalDate.of(2017, 9, 10), LocalTime.of(18, 0), 100, 100, 78);
+        TrainBean busConstantaToBucuresti = new TrainBean(id.getAndIncrement(), "InterCity", "Constanta", "Bucuresti", LocalDate.of(2017, 9, 10), LocalTime.of(18, 0), 100, 100, 78);
         busses.add(busBacauToBucuresti);
         busses.add(busBucurestiToBacau);
+        busses.add(busConstantaToBucuresti);
+        busses.add(busBucurestiToConstanta);
 
         log.info("Creating tables");
 
@@ -70,13 +85,6 @@ public class Application implements CommandLineRunner{
                 rs -> {
                     log.info("Here is your " + rs.getRow() + "entry found: " + rs.getInt("id") + " " + rs.getString("name") + " " + rs.getDate("date") + " " + rs.getTime("departure_time"));
                 });
-    }
-
-    public static List<Object[]> busListAsObjects(Collection<TrainBean> busses) {
-        return busses.stream().map(
-                bus -> new Object[]{bus.getId(), bus.getName(), bus.getDepartureCity(), bus.getArrivalCity(), Date.valueOf(bus.getDate()),
-                        Time.valueOf(bus.getDepartureTime()), bus.getNrSeats(), bus.getNrSeatsAvailable(), bus.getPrice()})
-                .collect(Collectors.toList());
     }
 
 }
