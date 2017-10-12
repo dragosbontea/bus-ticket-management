@@ -1,61 +1,28 @@
-ul.tabs
+div.citiesDropdown
 {
-display: table;
-margin: 0;
-padding: 0;
-list-style: none;
-position: relative;
+    display:block;
+    text-align: center;
+}
+citiesDropdown
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+div.trainTableDiv {
+
+    width: 561px ;
+    margin-top: 100px;
+    margin-left: auto ;
+    margin-right: auto ;
+    display: block;
+    text-align: left;
+    opacity: 0;
 }
 
-ul.tabs li
-{
-margin: 0;
-padding: 0;
-list-style: none;
-display: table-cell;
-float: left;
-position: relative;
-}
-
-ul.tabs a
-{
-position: relative;
-display: block;
-}
-
-/* dropdowns
-*************************/
-
-ul.dropdown
-{
-margin: 0;
-padding: 0;
-display: block;
-position: absolute;
-z-index: 999;
-top: 100%;
-width: 250px;
-display: none;
-left: 0;
-}
-
-ul.dropdown ul.dropdown
-{
-top: 0;
-left: 95%;
-}
-
-ul.dropdown li
-{
-margin: 0;
-padding: 0;
-float: none;
-position: relative;
-list-style: none;
-display: block;
-}
-
-ul.dropdown li a
-{
-display: block;
+.trainTable td, tbody {
+     display: inline-block;
+     border: 2px solid black;
+     padding: 0 15px 0 15px;
 }

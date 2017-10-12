@@ -1,3 +1,4 @@
-app/beans/BusBean.class
-app/Application.class
-app/controllers/CitiesController.class
+app\controllers\CitiesController.class
+app\beans\TrainBean.class
+app\controllers\TrainController.class
+app\Application.class

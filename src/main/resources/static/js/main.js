@@ -7,12 +7,71 @@ jQuery.ajax({
     },
     async:false
 });
-console.log(listOfCities);
 
-var citiesDropdownList = document.getElementById("select-city-dropdown").getElementsByClassName("dropdown")[0];
-var a = $("div.cityDropdown > div.dropdown > div.dropdown ul");
-for(var i = 0; len = listOfCities.length; i++) {
-//    citiesDropdownList.append("<li><a href=\"#\">" + listOfCities[i] + "</a></li>");
-    a.append($("<li>" + listOfCities[i] + "</li>"));
+var select = document.getElementById("selectCity");
+// Optional: Clear all existing options first:
+
+//select.innerHTML = "<option class="disabledOpt" disabled selected value>-- please choose --</option>";
+select.innerHTML = "<option disabled selected value> --please choose -- </option>";
+for(var i = 0; i < listOfCities.length; i++) {
+    var opt = listOfCities[i];
+    console.log(opt);
+    select.innerHTML += "<option value=\"" + opt + "\">" + opt + "</option>";
 }
 
+function toggle(el){
+    var city = el.options[el.selectedIndex].value;
+    var table = document.getElementById('trainTable');
+    var tbody = document.getElementById('tbody_id');
+    if(tbody !== null) {
+        tbody.parentNode.removeChild(tbody);
+    }
+
+    var trainsFromCity = "";
+    jQuery.ajax({
+        url: "http://localhost:8080/getTrainsPerCity?city=" + city,
+        success: function(response) {
+            trainsFromCity = response;
+        },
+        async:false
+    });
+
+    var new_tbody = document.createElement('tbody');
+    new_tbody.setAttribute("id", "tbody_id");
+    for(i = 0; i < trainsFromCity.length; i++) {
+        var newRow = new_tbody.insertRow(i);
+        createRowForTrain(trainsFromCity[i], newRow);
+    }
+    table.appendChild(new_tbody);
+    table.style.opacity = "1";
+    document.getElementsByClassName("trainTableDiv")[0].style.opacity = "1";
+//    table.style.visibility = "visible";
+}
+
+function createRowForTrain(train, row) {
+    var cell = row.insertCell(0);
+    var cellText = document.createTextNode(train.name);
+    cell.appendChild(cellText);
+
+    cell = row.insertCell(1);
+    cellText = document.createTextNode(train.departureCity);
+    cell.appendChild(cellText);
+
+    cell = row.insertCell(2);
+    cellText = document.createTextNode(train.arrivalCity);
+    cell.appendChild(cellText);
+
+    cell = row.insertCell(3);
+    var date = train.date;
+    cellText = document.createTextNode(date.year + "-" + date.monthValue + "-" + date.dayOfMonth);
+    cell.appendChild(cellText);
+
+    cell = row.insertCell(4);
+    var time = train.departureTime;
+    cellText = document.createTextNode(time.hour + ":" + time.minute);
+    cell.appendChild(cellText);
+
+    cell = row.insertCell(5);
+    cellText = document.createTextNode(train.price + " RON");
+    cell.appendChild(cellText);
+}

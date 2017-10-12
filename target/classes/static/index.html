@@ -7,21 +7,30 @@
 </head>
 
 <body>
-
-
-<div class="cityDropdown" id = "select-city-button">
-    <h2>Dropdowns</h2>
-    <p>Select the city</p>
-    <div class="dropdown" id = "select-city-dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Cities
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu" id = "select-list">
-        </ul>
-    </div>
+<div class="citiesDropdown">
+        <form id="form">
+            <legend>Departure City</legend>
+            <select id="selectCity" onchange="toggle(this)"></select>
+        </form>
 </div>
+
+<div class ="trainTableDiv">
+    <table id="trainTable">
+    <caption>Available trains for selected city</caption>
+        <thead>
+            <th>Train Name</th>
+            <th>Departure City</th>
+            <th>Arrival City</th>
+            <th>Departure date</th>
+            <th>Departure time</th>
+            <th>Price</th>
+        </thead>
+    </table>
+</div>
+
+
 
 <script src='https://code.jquery.com/jquery-2.1.3.js'></script>
 <script src="js/main.js"></script>
-
 </body>
 </html>
