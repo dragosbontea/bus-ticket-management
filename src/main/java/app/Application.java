@@ -54,10 +54,15 @@ public class Application implements CommandLineRunner{
         TrainBean busBacauToBucuresti = new TrainBean(id.getAndIncrement(), "InterCity", "Bacau", "Bucuresti", LocalDate.of(2017, 9, 10), LocalTime.of(18, 0), 100, 100, 78);
         TrainBean busBucurestiToConstanta = new TrainBean(id.getAndIncrement(), "InterCity", "Bucuresti", "Constanta", LocalDate.of(2017, 9, 10), LocalTime.of(18, 0), 100, 100, 78);
         TrainBean busConstantaToBucuresti = new TrainBean(id.getAndIncrement(), "InterCity", "Constanta", "Bucuresti", LocalDate.of(2017, 9, 10), LocalTime.of(18, 0), 100, 100, 78);
+        TrainBean busBucurestiToPloiesti = new TrainBean(id.getAndIncrement(), "InterCity", "Bucuresti", "Ploiesti", LocalDate.of(2017, 9, 13), LocalTime.of(18, 0), 100, 100, 34);
+        TrainBean busPloiestiToBucuresti = new TrainBean(id.getAndIncrement(), "InterCity", "Ploiesti", "Bucuresti", LocalDate.of(2017, 9, 13), LocalTime.of(20, 0), 100, 100, 34);
+
         busses.add(busBacauToBucuresti);
         busses.add(busBucurestiToBacau);
         busses.add(busConstantaToBucuresti);
         busses.add(busBucurestiToConstanta);
+        busses.add(busBucurestiToPloiesti);
+        busses.add(busPloiestiToBucuresti);
 
         log.info("Creating tables");
 

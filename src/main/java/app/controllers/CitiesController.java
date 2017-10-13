@@ -20,6 +20,7 @@ public class CitiesController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @SuppressWarnings("unused")
     @ResponseBody
     @RequestMapping(value = "/getCities", method = RequestMethod.GET)
     public List<String> getCities() {

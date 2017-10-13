@@ -17,6 +17,7 @@ public class TrainController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @SuppressWarnings("unused")
     @ResponseBody
     @RequestMapping(value = "/getTrainsPerCity", method = RequestMethod.GET)
     public List<TrainBean> getCities(@RequestParam(value="city") String city) {

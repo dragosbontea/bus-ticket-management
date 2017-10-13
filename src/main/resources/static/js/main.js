@@ -1,9 +1,11 @@
 
 var listOfCities = "";
 jQuery.ajax({
-    url: "http://localhost:8080/getCities",
+    url: "http://bucd550:8080/getCities",
     success: function(response) {
-        listOfCities = response;
+        listOfCities = response.filter(function(elem, index, self) {
+                           return index == self.indexOf(elem);
+                       })
     },
     async:false
 });
@@ -27,7 +29,7 @@ function toggle(el){
 
     var trainsFromCity = "";
     jQuery.ajax({
-        url: "http://localhost:8080/getTrainsPerCity?city=" + city,
+        url: "http://bucd550:8080/getTrainsPerCity?city=" + city,
         success: function(response) {
             trainsFromCity = response;
         },
@@ -65,10 +67,48 @@ function createRowForTrain(train, row) {
 
     cell = row.insertCell(4);
     var time = train.departureTime;
-    cellText = document.createTextNode(time.hour + ":" + time.minute);
+    if(time.minute === 0) {
+        cellText = document.createTextNode(time.hour + ":" + time.minute + "0");
+    }
+    else {
+        cellText = document.createTextNode(time.hour + ":" + time.minute);
+    }
+
     cell.appendChild(cellText);
 
     cell = row.insertCell(5);
     cellText = document.createTextNode(train.price + " RON");
     cell.appendChild(cellText);
+
+    cell = row.insertCell(6);
+    var btn = document.createElement('input');
+    btn.type = "button";
+    btn.className = "btn";
+    btn.value = "Buy Ticket";
+    btn.onclick= function() {
+        buyButton(train);
+    };
+    cell.appendChild(btn);
+
+}
+
+function buyButton(train) {
+    var modal = document.getElementById('buyTicketModal');
+    var span = document.getElementsByClassName("close_buyTicketModal")[0];
+    modal.style.display = "block";
+    span.onclick = function() {
+       modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    var modalHeader = document.getElementsByClassName("modal-header-buyTicket");
+    var h4 = document.createElement("h4");
+    h4.textContent= "Purchasing a ticket for train " + train.name + " going from "
+                    + train.departureCity + " to " + train.arrivalCity +
+                    " leaving on " + train.date + " at " + train.departureTime;
+    modalHeader.appendChild(h4);
 }
