@@ -1,22 +1,32 @@
-# Compiled class file
 *.class
+*.patch
 
-# Log file
-*.log
+# Intellij #
+.idea
+*.iml
+.idea/
 
-# BlueJ files
-*.ctxt
+# File-based project format #
+*.ipr
+*.iws
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+
+# Maven #
+target/
+
+
+# os #
+.directory
 
 # Package Files #
 *.jar
 *.war
 *.ear
-*.zip
-*.tar.gz
-*.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Ignore release temp files, and version change backups #
+.gitattributes
+pom.xml.versionsBackup
+pom.xml.releaseBackup
+release.properties
+
+
