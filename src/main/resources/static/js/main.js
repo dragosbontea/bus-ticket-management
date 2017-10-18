@@ -1,4 +1,5 @@
 
+//get the cities with trains available
 var listOfCities = "";
 jQuery.ajax({
     url: "http://bucd550:8080/getCities",
@@ -15,7 +16,6 @@ var select = document.getElementById("selectCity");
 select.innerHTML = "<option disabled selected value> --please choose -- </option>";
 for(var i = 0; i < listOfCities.length; i++) {
     var opt = listOfCities[i];
-    console.log(opt);
     select.innerHTML += "<option value=\"" + opt + "\">" + opt + "</option>";
 }
 
@@ -27,6 +27,7 @@ function toggle(el){
         tbody.parentNode.removeChild(tbody);
     }
 
+    // get the trains from the db
     var trainsFromCity = "";
     jQuery.ajax({
         url: "http://bucd550:8080/getTrainsPerCity?city=" + city,
@@ -36,6 +37,7 @@ function toggle(el){
         async:false
     });
 
+    //create the table with the trains
     var new_tbody = document.createElement('tbody');
     new_tbody.setAttribute("id", "tbody_id");
     for(i = 0; i < trainsFromCity.length; i++) {
@@ -48,6 +50,7 @@ function toggle(el){
 }
 
 function createRowForTrain(train, row) {
+    // creates a row in the train table
     var cell = row.insertCell(0);
     var cellText = document.createTextNode(train.name);
     cell.appendChild(cellText);
@@ -61,19 +64,11 @@ function createRowForTrain(train, row) {
     cell.appendChild(cellText);
 
     cell = row.insertCell(3);
-    var date = train.date;
-    cellText = document.createTextNode(date.year + "-" + date.monthValue + "-" + date.dayOfMonth);
+    cellText = document.createTextNode(getDateFromTrain(train.date));
     cell.appendChild(cellText);
 
     cell = row.insertCell(4);
-    var time = train.departureTime;
-    if(time.minute === 0) {
-        cellText = document.createTextNode(time.hour + ":" + time.minute + "0");
-    }
-    else {
-        cellText = document.createTextNode(time.hour + ":" + time.minute);
-    }
-
+    cellText = document.createTextNode(getTimeFromTrain(train.departureTime));
     cell.appendChild(cellText);
 
     cell = row.insertCell(5);
@@ -94,7 +89,7 @@ function createRowForTrain(train, row) {
 
 function buyButton(train) {
     var modal = document.getElementById('buyTicketModal');
-    var span = document.getElementsByClassName("close_buyTicketModal")[0];
+    var span = document.getElementsByClassName("close_buyTicket-span")[0];
     modal.style.display = "block";
     span.onclick = function() {
        modal.style.display = "none";
@@ -105,10 +100,60 @@ function buyButton(train) {
         }
     }
 
-    var modalHeader = document.getElementsByClassName("modal-header-buyTicket");
-    var h4 = document.createElement("h4");
-    h4.textContent= "Purchasing a ticket for train " + train.name + " going from "
-                    + train.departureCity + " to " + train.arrivalCity +
-                    " leaving on " + train.date + " at " + train.departureTime;
-    modalHeader.appendChild(h4);
+    // js voodoo to not retain previous header
+    var modalHeader = document.getElementsByClassName("CbuyTicketModal-content")[0];
+    var previousHeader = modalHeader.getElementsByTagName("h4")[0];
+    if(previousHeader != null) {
+        modalHeader.removeChild(previousHeader);
+    }
+
+    // check if there are any more fares for the selected train
+    if(trainHasNoMoreSeats(train)) {
+        alert("The train has no more seats. Please choose another train");
+        modal.style.display = "none";
+        return;
+    }
+
+    //adding the title according to the train selected
+    $("#Cmodal-title").text("Purchasing a ticket for train " + train.name + " leaving from "
+                                               + train.departureCity + " to " + train.arrivalCity +
+                                               ", leaving on " + getDateFromTrain(train.date) + " at " + getTimeFromTrain(train.departureTime) + ".");
+}
+
+function getDateFromTrain(date) {
+    return date.year + "-" + date.monthValue + "-" + date.dayOfMonth;
+}
+
+function getTimeFromTrain(time) {
+    if(time.minute === 0) {
+        return time.hour + ":" + time.minute + "0";
+    }
+    else {
+        return time.hour + ":" + time.minute;
+    }
+}
+
+function trainHasNoMoreSeats(train) {
+    if(train.available_seats == 0) {
+        return true;
+    }
+    else return false;
+
+}
+
+function payOnline(element) {
+    var modal = document.getElementById('pay-online');
+//     var modal2 = document.getElementById('buyTicketModal');
+    var span = document.getElementsByClassName("close_payOnline-span")[0];
+//     modal2.style.display = "none";
+    modal.style.display = "block";
+    span.onclick = function() {
+       modal.style.display = "none";
+    }
+//     window.onclick = function(event) {
+//         if (event.target == modal) {
+//             modal.style.display = "none";
+//         }
+//     }
+
 }

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Bus Tickets</title>
+    <title>Train Tickets</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-<div id="fixedheader">Bus Ticket Management</div>
-    <h1>Page Heading</h1>
+<div id="fixedheader">Train Ticket Management</div>
+<h1>Page Heading</h1>
 <div id="fixedfooter"></div>
 
 <div class="citiesDropdown">
-        <form id="form">
-            <legend>Departure City</legend>
-            <select id="selectCity" onchange="toggle(this)"></select>
-        </form>
+    <form id="form">
+        <legend>Departure City</legend>
+        <select id="selectCity" onchange="toggle(this)"></select>
+    </form>
 </div>
 
 <!-- The Modal -->
@@ -24,61 +24,76 @@
     <!-- Modal content -->
     <div class="CbuyTicketModal-content">
         <div class="modal-header-buyTicket">
-            <span class="close_buyTicketModal">&times;</span>
+            <span class="close_buyTicket-span">&times;</span>
+        </div>
+        <div id="Cmodal-title">
+            <label id="modal-title"> This is some text </label>
         </div>
         <div class="modal-body-buyTicket">
             <form class="form-horizontal" role="form">
                 <div class="form-group">
-                    <label  class="col-sm-2 control-label"
-                            for="inputEmail3">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control"
-                               id="inputEmail3" placeholder="Email"/>
+                    <label class="col1-name-ticket-label"
+                           for="input-name">Full Name</label>
+                    <div class="col10">
+                        <input type="text" required="required" class="ticket-input"
+                               id="input-name" placeholder="Name" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label"
-                           for="inputPassword3" >Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control"
-                               id="inputPassword3" placeholder="Password"/>
+                    <label class="col2-name-ticket-label"
+                           for="col2-docnr">Document number</label>
+                    <div class="col10">
+                        <input type="text" required="required" class="ticket-input"
+                               id="col2-docnr" pattern ="[0-9]*" placeholder="ex: 123456"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col3-name-ticket-label"
+                           for="input-email">Email</label>
+                    <div class="col10">
+                        <input type="email" class="ticket-input"
+                               id="input-email" placeholder="Email"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"/> Remember me
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Sign in</button>
+                        <button type="button" class="btn btn-default" onclick="payOnline(this)">Pay online</button>
                     </div>
                 </div>
             </form>
         </div>
-        <p>To be continued</p>
     </div>
 
 </div>
 
-<div class ="trainTableDiv">
+<div id="pay-online" class="CpayOnline">
+
+    <!-- Modal content -->
+    <div class="CpayOnline-content">
+        <div class="CpayOnline-close">
+            <span class="close_payOnline-span">&times;</span>
+        </div>
+        <div id="Cmodal-payOnline-title">
+            <label id="modal-payOnline-title"> This is some text </label>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="trainTableDiv">
     <table id="trainTable">
-    <caption>Available trains for selected city</caption>
+        <caption>Available trains for selected city</caption>
         <thead>
-            <th>Train Name</th>
-            <th>Departure City</th>
-            <th>Arrival City</th>
-            <th>Departure date</th>
-            <th>Departure time</th>
-            <th>Price</th>
+        <th>Train Name</th>
+        <th>Departure City</th>
+        <th>Arrival City</th>
+        <th>Departure date</th>
+        <th>Departure time</th>
+        <th>Price</th>
         </thead>
     </table>
 </div>
-
 
 
 <script src='https://code.jquery.com/jquery-2.1.3.js'></script>
