@@ -30,7 +30,7 @@
             <label id="modal-title"> This is some text </label>
         </div>
         <div class="modal-body-buyTicket">
-            <form class="form-horizontal" role="form">
+            <form id = "buyTicketForm" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label class="col1-name-ticket-label"
                            for="input-name">Full Name</label>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" class="btn btn-default" onclick="payOnline(this)">Pay online</button>
+                        <button type="button" class="btn btn-default" onclick="payOnline(this.form)">Pay online</button>
                     </div>
                 </div>
             </form>
@@ -82,7 +82,7 @@
 
 
 <div class="trainTableDiv">
-    <table id="trainTable">
+    <table id="trainTable" class="CtrainTable">
         <caption>Available trains for selected city</caption>
         <thead>
         <th>Train Name</th>

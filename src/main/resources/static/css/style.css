@@ -31,17 +31,16 @@ citiesDropdown
     margin-right: auto;
     text-align: left;
 }
-div.trainTableDiv {
+.trainTableDiv {
 
     width: 561px ;
     margin-top: 100px;
     margin-left: auto ;
     margin-right: auto ;
-    display: block;
+    display: table;
     text-align: left;
     opacity: 0;
 }
-
 
 /* The Modal (background) */
 .CbuyTicketModal {
@@ -101,8 +100,7 @@ div.trainTableDiv {
   font-size: 20px;
 }
 .modal-body-buyTicket {
-	 border-top: 80px none;
-     border-left: 6px solid blue;
+     border-bottom: 6px solid blue;
      background-color: lightgrey;
      padding:0;
      width: 100% ;

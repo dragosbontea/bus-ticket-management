@@ -141,19 +141,41 @@ function trainHasNoMoreSeats(train) {
 
 }
 
-function payOnline(element) {
+function payOnline(form) {
+
+    var formData = new Object();
+
+    formData.name = form[0].value;;
+    formData.docNr = form[1].value;
+    formData.email = form[2].value;
+
+    jsonFormData = JSON.stringify(formData);
+    $.ajax({
+         url: 'http://bucd550:8080/sendClientInfo',
+         type: 'POST', 
+         dataType: "json",
+         data: jsonFormData,
+         contentType: "application/json",
+         success: function(result) {
+           alert('SUCCESS');
+         }
+    });
+
+    
+    //triggerPayOnlineModal(); 
+}
+
+function triggerPayOnlineModal() {
     var modal = document.getElementById('pay-online');
-//     var modal2 = document.getElementById('buyTicketModal');
     var span = document.getElementsByClassName("close_payOnline-span")[0];
-//     modal2.style.display = "none";
     modal.style.display = "block";
     span.onclick = function() {
        modal.style.display = "none";
     }
-//     window.onclick = function(event) {
-//         if (event.target == modal) {
-//             modal.style.display = "none";
-//         }
-//     }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
 }
