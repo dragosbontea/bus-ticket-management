@@ -1,22 +1,26 @@
+# directories
+.settings/
+.target/
+.idea/
+.worksheet/
 bin/
 build/
-code/
-lib/
+dist/
+logs/
+node_modules/
+out/
 target/
+tmp/
 
-*.sw?
-.#*
-*#
-*~
+# files
 *.iml
-.*.md.html
+*/.DS_Store
+\#*
+.cache
 .classpath
+.DS_Store
+.history
 .idea
-.gradle
+.idea_modules
 .project
-.settings
-.springBeans
-build.log
-MANIFEST.MF
-settings.xml
-
+RUNNING_PID
