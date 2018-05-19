@@ -1,32 +1,22 @@
-*.class
-*.patch
-
-# Intellij #
-.idea
-*.iml
-.idea/
-
-# File-based project format #
-*.ipr
-*.iws
-
-
-# Maven #
+bin/
+build/
+code/
+lib/
 target/
 
-
-# os #
-.directory
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# Ignore release temp files, and version change backups #
-.gitattributes
-pom.xml.versionsBackup
-pom.xml.releaseBackup
-release.properties
-
+*.sw?
+.#*
+*#
+*~
+*.iml
+.*.md.html
+.classpath
+.idea
+.gradle
+.project
+.settings
+.springBeans
+build.log
+MANIFEST.MF
+settings.xml
 
